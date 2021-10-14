@@ -30,11 +30,10 @@ const inColumns = (records, settings) => {
    const formatted = [];
    let row = [];
    let counter = 1;
-   records
-      .filter(e => {
+   records.filter(e => {
          let albumOk = false;
          settings.albumNumber === -1 ? albumOk = true : albumOk = e.albumId === settings.albumNumber;
-         if(albumOk && searchOk(e, settings.searchString)) return e;
+         return albumOk && searchOk(e, settings.searchString);
       })
          .slice(0, settings.imgLimit).forEach(r => {
             row.push(r);
@@ -54,6 +53,7 @@ const displayCount = (records) => {
    console.log(records);
    records.map(r => {
       count += r.length;
+      return r;
    })
    return count;
 }
@@ -81,7 +81,7 @@ const PhotoDisplay = (props) => {
       e.preventDefault();
       setSearchString("");
    }
-
+   console.log("albums:", albums)
    return(
       <div>  
          <div className={styles.Controls}>       

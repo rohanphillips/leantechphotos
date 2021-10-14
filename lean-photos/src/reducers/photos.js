@@ -27,13 +27,10 @@ const photosSlice = createSlice({
          state.photoList = action.payload;
          state.albums = createAlbums(state.photoList);
          state.photosLoaded = true;
-      },
-      updateDisplayRecords(state, action){
-         state.displayRecords = action.payload;
       }
    }
 })
 
-export const {setPhotosLoaded, loadPhotos, updateDisplayRecords} = photosSlice.actions;
+export const {setPhotosLoaded, loadPhotos} = photosSlice.actions;
 
 export default photosSlice.reducer;

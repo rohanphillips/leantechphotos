@@ -32,7 +32,6 @@ const ControlPanel = (props) => {
 export default connect(state => {
    return {
       photosLoaded: state.photosState.photosLoaded,
-      photoList: state.photosState.photoList,
-      albums: state.photosState.albums
+      photoList: state.photosState.photoList
    }
 }, {getPhotos})(ControlPanel);
