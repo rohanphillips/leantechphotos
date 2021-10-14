@@ -18,6 +18,13 @@ const albumOptions = (num) => {
    return result.concat(colOptions(num));;
 }
 
+const searchOk = (photo, searchString) => {
+   const inAlbumId = photo.albumId.toString().indexOf(searchString) > -1;
+   const inId = photo.id.toString().indexOf(searchString) > -1;
+   const inTitle = photo.title.indexOf(searchString) > -1;
+   return inAlbumId || inId || inTitle || searchString === "";
+}
+
 const inColumns = (records, settings) => {
    const formatted = [];
    let row = [];
@@ -26,7 +33,7 @@ const inColumns = (records, settings) => {
       .filter(e => {
          let albumOk = false;
          settings.albumNumber === -1 ? albumOk = true : albumOk = e.albumId === settings.albumNumber;
-         if(albumOk) return e;
+         if(albumOk && searchOk(e, settings.searchString)) return e;
       })
          .slice(0, settings.imgLimit).forEach(r => {
             row.push(r);
@@ -41,20 +48,34 @@ const inColumns = (records, settings) => {
    return formatted;
 }
 
+
+
 const PhotoDisplay = (props) => {
    const { records, albums } = props;
    const [columns, setColumns] = useState({value: 2});
    const [imageLimit, setImageLimit] = useState(5);
    const [albumSelect, setAlbumSelect] = useState({value: -1});
+   const [searchString, setSearchString] = useState("");
+
    const cols = columns.value;
    const imgLimit = imageLimit;
    const albumCount = Object.keys(albums).length;
    const albumNumber = albumSelect.value;
    
-   const formattedRecords = inColumns(records, {albumNumber: albumNumber, imgLimit: imgLimit, cols: cols});
+   const formattedRecords = inColumns(records, {albumNumber: albumNumber, imgLimit: imgLimit, cols: cols, searchString: searchString});
+
+   const onSearchChange = (e) => {
+      e.preventDefault();
+      setSearchString(e.target.value);
+   };
+
+   const onClear = (e) => {
+      e.preventDefault();
+      setSearchString("");
+   }
+
    return(
-      <div>
-         Photo Display - Click to any image to Enlarge
+      <div>         
          <div>
             <Select
                defaultValue={{label: cols, value: cols}}
@@ -79,6 +100,19 @@ const PhotoDisplay = (props) => {
                options={albumOptions(albumCount + 1)}
             />
          </div>
+         <div>
+            <form>
+               <label>
+                  Search For 
+                  <input onChange={onSearchChange} type="text" name="search" value={searchString} />
+               </label>
+               <button onClick={onClear}>Clear</button>
+            </form>
+         </div>
+         {formattedRecords.length > 0 &&
+            <div>Photo Display - Click to any image to Enlarge</div>
+         }
+         
          {formattedRecords.map(e => {
             return (
                <div>

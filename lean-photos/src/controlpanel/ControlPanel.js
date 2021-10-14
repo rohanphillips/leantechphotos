@@ -24,12 +24,6 @@ const ControlPanel = (props) => {
                <div>
                   <Stats />
                </div>
-               <div>
-                  <div>Column Count</div>
-                  <div>Image Limit</div>
-                  <div>Albumn Selector</div>
-                  <div>Search for</div>
-               </div>
             </div>            
          }         
       </div>
