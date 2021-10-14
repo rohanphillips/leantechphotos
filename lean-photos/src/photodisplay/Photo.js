@@ -15,13 +15,16 @@ const Photo = (props) => {
             seturl(photo.thumbnailUrl);
             setsize("s");
             break;
+         default:
+            seturl(photo.thumbnailUrl);
+            setsize("s");
       }
    }
 
    return(
       <div>
          <div>
-            {<img onClick={handleClick} src={url} title={photo.title}/>}
+            {<img onClick={handleClick} src={url} title={photo.title} alt={photo.id}/>}
          </div>
          <div>ID - {photo.id}</div>
       </div>

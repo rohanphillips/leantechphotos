@@ -2,12 +2,12 @@ import { React, useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import Stats from '../stats/Stats'
 
-import { getPhotos, setDisplayRecords } from '../actions/photos'
+import { getPhotos } from '../actions/photos'
 
 
 const ControlPanel = (props) => {
-   const [AlbumID, setAlbumID] = useState(0);
-   const { photosLoaded, getPhotos, setDisplayRecords } = props;
+   const [AlbumID] = useState(0);
+   const { photosLoaded, getPhotos } = props;
 
    useEffect(() => {
       if(!photosLoaded){
@@ -26,7 +26,10 @@ const ControlPanel = (props) => {
                   <Stats />
                </div>
                <div>
-                  Album Selector
+                  <div>Column Count</div>
+                  <div>Image Limit</div>
+                  <div>Albumn Selector</div>
+                  <div>Search for</div>
                </div>
             </div>            
          }         
@@ -40,4 +43,4 @@ export default connect(state => {
       photoList: state.photosState.photoList,
       albums: state.photosState.albums
    }
-}, {getPhotos, setDisplayRecords})(ControlPanel);
+}, {getPhotos})(ControlPanel);

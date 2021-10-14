@@ -1,6 +1,5 @@
 import { React } from 'react'
 import { connect } from 'react-redux'
-import { updateAlbums } from '../reducers/photos';
 
 const Stats = (props) => {
    const { photosLoaded, photoList, albums } = props;

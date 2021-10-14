@@ -1,10 +1,9 @@
-import { React } from 'react';
+import { React, useState } from 'react';
 import Photo from '../photodisplay/Photo'
 
 const PhotoDisplay = (props) => {
-   console.log("PhotoDisplay Props:", props)
+   const [columns, setcolumns] = useState(2);
    const { records } = props;
-   const columns = 4;
    const inColumns = (records) => {
       const formatted = [];
       let row = [];

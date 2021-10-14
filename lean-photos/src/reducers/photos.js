@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const initialState = {
-   photosLoaded: false,
+   photosLoaded: true,
    photoList: [{
       "albumId": 3,
       "id": 101,
@@ -72,7 +72,7 @@ export const initialState = {
       "title": "veritatis numquam eius",
       "url": "https://via.placeholder.com/600/eaf2e1",
       "thumbnailUrl": "https://via.placeholder.com/150/eaf2e1"
-    }]
+    }],
 }
 
 const createAlbums = (photoList) => {
