@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select'
 import NumericInput from 'react-numeric-input';
@@ -15,36 +15,43 @@ const colOptions = (num) =>{
 
 const albumOptions = (num) => {
    let result = [{ value: -1, label: 'Not Filtered'}];
-   result.concat(colOptions(num));
-   return result;
+   return result.concat(colOptions(num));;
+}
+
+const inColumns = (records, settings) => {
+   const formatted = [];
+   let row = [];
+   let counter = 1;
+   records
+      .filter(e => {
+         let albumOk = false;
+         settings.albumNumber === -1 ? albumOk = true : albumOk = e.albumId === settings.albumNumber;
+         if(albumOk) return e;
+      })
+         .slice(0, settings.imgLimit).forEach(r => {
+            row.push(r);
+            counter ++;
+            if(counter > settings.cols){
+               counter = 1;
+               formatted.push(row);
+               row = [];
+            }         
+   })
+   if(counter !== 1) formatted.push(row);
+   return formatted;
 }
 
 const PhotoDisplay = (props) => {
    const { records, albums } = props;
    const [columns, setColumns] = useState({value: 2});
-   const [imageLimit, setImageLimit] = useState(records.length);
+   const [imageLimit, setImageLimit] = useState(5);
    const [albumSelect, setAlbumSelect] = useState({value: -1});
    const cols = columns.value;
    const imgLimit = imageLimit;
-   console.log("props:", props, imgLimit)
-   const inColumns = (records) => {
-      const formatted = [];
-      let row = [];
-      let counter = 1;
-      records.slice(0, imgLimit).forEach(r => {
-         row.push(r);
-         counter ++;
-         if(counter > cols){
-            counter = 1;
-            formatted.push(row);
-            row = [];
-         }         
-      })
-      if(counter !== 1) formatted.push(row);
-      return formatted;
-   }
-   const formattedRecords = inColumns(records);
-   console.log("imageLimit:", imageLimit)
+   const albumCount = Object.keys(albums).length;
+   const albumNumber = albumSelect.value;
+   
+   const formattedRecords = inColumns(records, {albumNumber: albumNumber, imgLimit: imgLimit, cols: cols});
    return(
       <div>
          Photo Display - Click to any image to Enlarge
@@ -65,26 +72,21 @@ const PhotoDisplay = (props) => {
                onChange={setImageLimit}
             />
          </div>
-         {/* <div>
-            <Select
-               defaultValue={{label: 'All', value:records.length}}
-               onChange={setImageLimit}
-               options={colOptions(records.length)}
-            />
-         </div> */}
-         {/* <div>
+         <div>
             <Select
                defaultValue={{ value: -1, label: 'Not Filtered' }}
                onChange={setAlbumSelect}
-               options={albumOptions(albums.length + 1)}
+               options={albumOptions(albumCount + 1)}
             />
-         </div> */}
+         </div>
          {formattedRecords.map(e => {
             return (
                <div>
                   {e.map(i => {
                      return (
-                        <div style={{display: "inline-block"}}>{<Photo photo={i}/>}</div>
+                        <Fragment key={i.id}>
+                           <div style={{display: "inline-block"}}>{<Photo photo={i}/>}</div>
+                        </Fragment>
                      )
                   })}
                </div>

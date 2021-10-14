@@ -14,7 +14,6 @@ const ControlPanel = (props) => {
          getPhotos(AlbumID);
       } 
    })
-   console.log("Props:", props)
    return(
       <div>
          {!photosLoaded &&
