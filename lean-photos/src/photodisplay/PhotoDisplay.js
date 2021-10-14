@@ -49,7 +49,14 @@ const inColumns = (records, settings) => {
    return formatted;
 }
 
-
+const displayCount = (records) => {
+   let count = 0;
+   console.log(records);
+   records.map(r => {
+      count += r.length;
+   })
+   return count;
+}
 
 const PhotoDisplay = (props) => {
    const { records, albums } = props;
@@ -76,57 +83,77 @@ const PhotoDisplay = (props) => {
    }
 
    return(
-      <div>         
-         <div>
-            <Select
-               defaultValue={{label: cols, value: cols}}
-               onChange={setColumns}
-               options={colOptions(5)}
-            />
-         </div>
-         <div>
-            <NumericInput
-               step={1}
-               precision={0}
-               value={imageLimit}
-               min={1}
-               max={records.length}
-               onChange={setImageLimit}
-            />
-         </div>
-         <div>
-            <Select
-               defaultValue={{ value: -1, label: 'Not Filtered' }}
-               onChange={setAlbumSelect}
-               options={albumOptions(albumCount + 1)}
-            />
-         </div>
-         <div>
-            <form>
-               <label>
-                  Search For 
-                  <input onChange={onSearchChange} type="text" name="search" value={searchString} />
-               </label>
-               <button onClick={onClear}>Clear</button>
-            </form>
+      <div>  
+         <div className={styles.Controls}>       
+            <div className={styles.singleControl}>
+               <div className={styles.centerBlock}>Columns</div>
+               <div className={styles.centerBlock}>
+                  <Select
+                     defaultValue={{label: cols, value: cols}}
+                     onChange={setColumns}
+                     options={colOptions(5)}
+                  />
+               </div>
+            </div>
+            <div className={styles.singleControl}>
+               <div className={styles.centerBlock}>Images to Display</div>
+               <div className={styles.centerBlock}>
+                  <NumericInput
+                     style={styles.centerBlock}
+                     step={1}
+                     precision={0}
+                     value={imageLimit}
+                     min={1}
+                     max={records.length}
+                     onChange={setImageLimit}
+                  />
+               </div>
+            </div>
+            <div className={styles.singleControl}>
+               <div className={styles.centerBlock}>Select Album</div>
+               <div className={styles.centerBlock}>
+                  <Select
+                     defaultValue={{ value: -1, label: 'Not Filtered' }}
+                     onChange={setAlbumSelect}
+                     options={albumOptions(albumCount + 1)}
+                  />
+               </div>
+            </div>
+            <div className={styles.singleControl}>
+               <div className={styles.centerBlock}>
+                  <div className={styles.centerBlock}>Search for ...</div>
+                  <form>
+                     <input onChange={onSearchChange} type="text" name="search" value={searchString} />
+                     <button onClick={onClear}>Clear</button>
+                  </form>
+               </div>
+            </div>
          </div>
          {formattedRecords.length > 0 &&
-            <div>Photo Display - Click to any image to Enlarge</div>
-         }
-         
-         {formattedRecords.map(e => {
-            return (
-               <div>
-                  {e.map(i => {
-                     return (
-                        <Fragment key={i.id}>
-                           <div style={{display: "inline-block"}}>{<Photo photo={i}/>}</div>
-                        </Fragment>
-                     )
-                  })}
+            <div>
+               <div className={styles.centerBlock}>Photo Display - Click to any image to Enlarge</div>
+               <div className={styles.centerBlock}>
+                  Currently showing {displayCount(formattedRecords)} photos
                </div>
-            )
-         })}
+            </div>
+         }
+         <div className={styles.sides}></div>
+         <div className={styles.centerBlock}>
+            {formattedRecords.map(e => {
+               return (
+                  <div className={styles.gridRow}>
+                     {e.map(i => {
+                        return (
+                           <Fragment key={i.id}>
+                              <div className={styles.photoBlock}>{<Photo photo={i}/>}</div>
+                           </Fragment>
+                        )
+                     })}
+                  </div>
+               )
+            })}
+         </div>
+         <div className={styles.sides}></div>
       </div>
    )
 };

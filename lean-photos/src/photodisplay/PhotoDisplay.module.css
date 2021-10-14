@@ -1,0 +1,42 @@
+.Controls {
+   width: 100%;
+}
+
+.singleControl{
+   width: 24%;
+   display: inline-block;
+   padding: 7px;
+   align-items: center;
+   justify-content: center;
+}
+
+.centerBlock {
+   align-items: center;
+   justify-content: center;
+   text-align: center;
+   font-size: large;
+   width: 60%;
+}
+
+.imageGrid{
+   width: 100%;
+}
+
+.gridRow{
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+}
+
+.photoBlock{
+   display: inline-block;   
+}
+
+.centerBlock{
+   width: 100%;
+}
+
+.sides{
+   width: 24%;
+   display: inline-block;
+}
