@@ -30,9 +30,3 @@ export const getPhotos = (id) => {
       })
    }
 }
-
-export const setDisplayRecords = (records) => {
-   return (dispatch) => {
-      dispatch(updateDisplayRecords(records));
-   }
-}

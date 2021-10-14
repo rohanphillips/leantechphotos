@@ -53,6 +53,18 @@ The photo dashboard in a simple console that provides the following functionalit
 * A Statistics Panel that lists the total number of `Albums` available and also the total number of `Photos`
 * A selection row consisiting of 4 different options for displaying photos
 
+   `Images to Display`, `Select Album` and `Search for` all interact with the results being displayed.
+   
+   * Columns: Use this control to define how many columns will be used for laying out the photo thumbnails
+   * Images to Display: Use this control to display/filter the number of images you'd like to display.  To save with load time, current default is 5.
+   * Select Albumn: Use this control to display the specific album to be viewed.  Selecting `Not Filtered` will allow results from all albums to be displayed
+   * Search for: Use this field to search `albumId`, `id` and `title` for any combination of numbers and letters.  `Currently showing` will automatically be adjusted as the search is conducted.
+
+All photo's were provided with a thumbnail URL and a regular URL.  To demonstrate the ability of being able to use data sent to the `Photo` component, a photo can be clicked on and it will toggle between the two URL's provided
+
+## React Hooks
+`useState` and `useEffect` were both used in this project to help with management of state inside multiple components
+
 ## CSS
 I did spend a little time illustrating the connection of classes with different formatting to demonstrate an ability to integrate and work with CSS
 
