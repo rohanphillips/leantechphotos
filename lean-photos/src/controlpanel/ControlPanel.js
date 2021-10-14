@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from 'react';
 import { connect } from 'react-redux'
 import Stats from '../stats/Stats'
+import styles from '../controlpanel/ControlPanel.module.css'
 
 import { getPhotos } from '../actions/photos'
 
@@ -17,13 +18,11 @@ const ControlPanel = (props) => {
    return(
       <div>
          {!photosLoaded &&
-            <p>Loading....</p>
+            <p className={styles.Loading}>Loading....</p>
          }
          {photosLoaded &&
             <div>
-               <div>
-                  <Stats />
-               </div>
+               <Stats />
             </div>            
          }         
       </div>

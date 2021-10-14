@@ -1,5 +1,6 @@
 import { React } from 'react'
 import { connect } from 'react-redux'
+import styles from '../stats/Stats.module.css'
 
 const Stats = (props) => {
    const { photosLoaded, photoList, albums } = props;
@@ -15,7 +16,7 @@ const Stats = (props) => {
       <div>
          {photosLoaded &&
             <div>
-               <p>Photos Loaded</p>
+               <p className={styles.Loaded}>Photos Loaded</p>
                <table>
                   <tbody>
                      <tr>
