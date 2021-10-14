@@ -18,7 +18,7 @@ nodeJS - v14.13.1
 npm install
 ```
 
-# Testing
+# App Review
 ```
 npm start
 ```
@@ -64,6 +64,11 @@ All photo's were provided with a thumbnail URL and a regular URL.  To demonstrat
 
 ## React Hooks
 `useState` and `useEffect` were both used in this project to help with management of state inside multiple components
+
+## Testing
+In the lead up to this techincal, I'd spend more time doing `Rspec` testing in a Ruby on Rails environment.
+
+I did add some unit testing to the Redux Store that tested the photos reducers
 
 ## CSS
 I did spend a little time illustrating the connection of classes with different formatting to demonstrate an ability to integrate and work with CSS
