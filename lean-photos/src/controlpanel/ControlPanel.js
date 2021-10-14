@@ -11,7 +11,7 @@ const ControlPanel = (props) => {
 
    useEffect(() => {
       if(!photosLoaded){
-         //getPhotos(AlbumID);
+         getPhotos(AlbumID);
       } 
    })
    console.log("Props:", props)
