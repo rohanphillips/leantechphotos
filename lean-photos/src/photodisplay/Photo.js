@@ -1,5 +1,4 @@
 import { React, useState } from 'react';
-import styles from '../photodisplay/PhotoDisplay.module.css'
 
 const Photo = (props) => {
    const { photo } = props

@@ -1,6 +1,6 @@
 import { baseUrl } from "./urlhelper";
 
-import { loadPhotos, updateDisplayRecords } from "../reducers/photos";
+import { loadPhotos } from "../reducers/photos";
 
 export const getPhotos = (id) => {
    let url = baseUrl;
