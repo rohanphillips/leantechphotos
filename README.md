@@ -68,4 +68,28 @@ All photo's were provided with a thumbnail URL and a regular URL.  To demonstrat
 ## CSS
 I did spend a little time illustrating the connection of classes with different formatting to demonstrate an ability to integrate and work with CSS
 
+# Review
+
+I enjoyed putting this project together for your review.  I look forward to speaking with you soon!
+
+# Connect
+<div>
+  <div style="height: 30px">
+    📫 How to reach me, rohan@rohanphillipscoding.com
+  </div>
+  <div>
+    <a href="https://www.linkedin.com/in/coderbluey/">
+      LinkedIn: coderbluey
+     </a>
+  </div>
+  <div>
+   <a href="https://twitter.com/coderbluey">
+      Twitter: @CoderBluey</a>      
+  </div>
+  <div>
+   <a href="https://rohanphillipscoding.com">
+      Blog: Rohan Phillips Coding</a>      
+  </div>
+</div>
+
 
