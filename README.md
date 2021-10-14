@@ -15,6 +15,7 @@ nodeJS - v14.13.1
 
 # Installation
 ```
+cd lean-photos
 npm install
 ```
 
@@ -69,6 +70,9 @@ All photo's were provided with a thumbnail URL and a regular URL.  To demonstrat
 In the lead up to this techincal, I'd spend more time doing `Rspec` testing in a Ruby on Rails environment.
 
 I did add some unit testing to the Redux Store that tested the photos reducers
+```
+npm test
+```
 
 ## CSS
 I did spend a little time illustrating the connection of classes with different formatting to demonstrate an ability to integrate and work with CSS
