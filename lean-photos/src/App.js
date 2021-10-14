@@ -9,11 +9,11 @@ import {
 import styles from './App.module.css';
 import Dashboard from './dashboard/Dashboard';
 
-function App() {
-  console.log(styles.header)
+function App(props) {
+  console.log(props)
   return (
     <Router>
-        <div className={styles.App}>
+        <div >
           <header className={styles.header}>
             Lean Photos
             <div className={styles.link}><a href="/photos">Photos</a></div>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Select from 'react-select'
 import NumericInput from 'react-numeric-input';
 import Photo from '../photodisplay/Photo'
+import styles from '../photodisplay/PhotoDisplay.module.css'
 
 const colOptions = (num) =>{
    let result = [];

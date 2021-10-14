@@ -17,22 +17,26 @@ const Stats = (props) => {
          {photosLoaded &&
             <div>
                <p className={styles.Loaded}>Photos Loaded</p>
-               <table>
-                  <tbody>
-                     <tr>
-                        <th>Stats</th>
-                        <th>Info</th>
-                     </tr>
-                     <tr>
-                        <td>Albums</td>
-                        <td>Count is {albumCount()}</td>
-                     </tr>
-                     <tr>
-                        <td>Total Photos</td>
-                        <td>Count is {photoCount()}</td>
-                     </tr>
-                  </tbody>
-               </table>
+               <div className={styles.blockside}></div>
+               <div className={styles.blockcenter}>
+                  <table className={styles.StatsTable}>
+                     <tbody>
+                        <tr>
+                           <th className={styles.alignright}>Stat Type</th>
+                           <th className={styles.alignleft}>Info</th>
+                        </tr>
+                        <tr>
+                           <td className={styles.alignright}>Albums</td>
+                           <td className={styles.alignleft}>Count is {albumCount()}</td>
+                        </tr>
+                        <tr>
+                           <td className={styles.alignright}>Total Photos</td>
+                           <td className={styles.alignleft}>Count is {photoCount()}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               <div className={styles.blockside}></div>
             </div>
          }
       </div>
