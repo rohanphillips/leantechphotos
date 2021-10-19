@@ -68,17 +68,16 @@ const PhotoDisplay = (props) => {
    const [albumSelect, setAlbumSelect] = useState({value: -1});
    const [searchString, setSearchString] = useState("");
    const [usePagination, setUsePagination] = useState(true);
-   const [imagesPerPage, setImagesPerPage] = useState(5);
+   const [imagesPerPage, setImagesPerPage] = useState(10);
 
    const cols = columns.value;
    const imgLimit = imageLimit;
    const albumCount = Object.keys(albums).length;
    const albumNumber = albumSelect.value;
    const workingRecordset = filteredRecords(records, {albumNumber: albumNumber, imgLimit: imgLimit, searchString: searchString});
-   console.log("workingRecordSet:", workingRecordset)
-   const [displayRecords, setDisplayRecords] = useState(null);
+   const [displayRecords, setDisplayRecords] = useState([]);
    
-   const formattedRecords = inColumns(workingRecordset, {cols: cols});
+   const formattedRecords = inColumns(displayRecords, {cols: cols});
 
    const onSearchChange = (e) => {
       e.preventDefault();
@@ -88,15 +87,8 @@ const PhotoDisplay = (props) => {
    const onClear = (e) => {
       e.preventDefault();
       setSearchString("");
-   }
+   } 
 
-   useEffect(() => {
-      if(displayRecords === null){
-         setDisplayRecords(workingRecordset);
-      } 
-   })
-
-   console.log("PhotoDisplay", displayRecords)
    return(
       <div>  
          <div className={styles.Controls}>       
@@ -144,7 +136,7 @@ const PhotoDisplay = (props) => {
                </div>
             </div>
          </div>
-         {formattedRecords.length > 0 &&
+         {
             <div>
                <div className={styles.centerBlock}>Photo Display - Click to any image to Enlarge</div>               
                <div className={styles.centerBlock}>
@@ -154,6 +146,7 @@ const PhotoDisplay = (props) => {
                      imagesPerPage={imagesPerPage}
                      setImagesPerPage={setImagesPerPage}
                      records={workingRecordset}
+                     displayRecords={displayRecords}
                      setDisplayRecords={setDisplayRecords}
                   />
                </div>
