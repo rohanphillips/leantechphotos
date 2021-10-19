@@ -1,6 +1,7 @@
 import {React, useState, useEffect} from 'react'
 import NumericInput from 'react-numeric-input';
 import styles from '../pages/Pagination.module.css'
+import PageNumbers from '../pages/PageNumbers'
 
 const Pagination = (props) => {
    const { imagesPerPage, setImagesPerPage, usePagination, setUsePagination, records, displayRecords, setDisplayRecords } = props;
@@ -46,8 +47,7 @@ const Pagination = (props) => {
          <div>
             {usePagination &&
                <div>
-                  <div className={styles.block}>Images Per Page</div>
-            
+                  <div className={styles.block}>Images Per Page</div>            
                   <div className={styles.block}>           
                      <NumericInput
                      step={1}
@@ -57,6 +57,12 @@ const Pagination = (props) => {
                      max={25}
                      onChange={onImagesPerPageChange}
                      />            
+                  </div>
+                  <div>
+                     <PageNumbers 
+                        pages={pages}
+                        pageNumber={pageNumber}
+                     />
                   </div>
                </div>
             }
