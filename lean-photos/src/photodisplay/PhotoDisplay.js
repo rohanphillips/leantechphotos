@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Select from 'react-select'
 import NumericInput from 'react-numeric-input';
 import Photo from '../photodisplay/Photo'
+import Pagination from '../pages/Pagination'
 import styles from '../photodisplay/PhotoDisplay.module.css'
 
 const colOptions = (num) =>{
@@ -64,6 +65,8 @@ const PhotoDisplay = (props) => {
    const [imageLimit, setImageLimit] = useState(5);
    const [albumSelect, setAlbumSelect] = useState({value: -1});
    const [searchString, setSearchString] = useState("");
+   const [usePagination, setUsePagination] = useState(false);
+   const [imagesPerPage, setImagesPerPage] = useState(5);
 
    const cols = columns.value;
    const imgLimit = imageLimit;
@@ -134,6 +137,14 @@ const PhotoDisplay = (props) => {
                <div className={styles.centerBlock}>Photo Display - Click to any image to Enlarge</div>
                <div className={styles.centerBlock}>
                   Currently showing {displayCount(formattedRecords)} photos
+               </div>
+               <div className={styles.centerBlock}>
+                  <Pagination 
+                     usePagination={usePagination}
+                     setUsePagination={setUsePagination}
+                     imagesPerPage={imagesPerPage}
+                     setImagesPerPage={setImagesPerPage}
+                  />
                </div>
             </div>
          }
