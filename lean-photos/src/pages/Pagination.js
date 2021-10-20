@@ -9,6 +9,7 @@ const Pagination = (props) => {
    const [lastPageNumber, setLastPageNumber] = useState(1);
    const [lastRecordCount, setLastRecordCount] = useState(null);
    const [newChanges, setNewChanges] = useState(false);
+   const [pageNeighbors, setPageNeighbors] = useState(0);
    let pages = Math.ceil(records.length / imagesPerPage);
    const startPointer = ((pageNumber - 1) * imagesPerPage);
    const onChange = (e) => {
@@ -19,6 +20,10 @@ const Pagination = (props) => {
    const onImagesPerPageChange = (num) => {
       setImagesPerPage(num);
       setNewChanges(true);
+   }
+
+   const onChangeNeighbors = (n) => {
+      setPageNeighbors(n);
    }
 
    useEffect(() => {
@@ -37,7 +42,7 @@ const Pagination = (props) => {
          setLastPageNumber(pageNumber);
       }
    })
-   console.log("Pagination");
+
    return (
       <div>
         <div className={styles.block}>
@@ -60,11 +65,23 @@ const Pagination = (props) => {
                      onChange={onImagesPerPageChange}
                      />            
                   </div>
+                  <div className={styles.block}>Center Neighbors</div>
+                  <div className={styles.block}>           
+                     <NumericInput
+                     step={1}
+                     precision={0}
+                     value={pageNeighbors}
+                     min={0}
+                     max={2}
+                     onChange={onChangeNeighbors}
+                     />            
+                  </div>
                   <div>
                      <PageNumbers 
                         pages={pages}
                         pageNumber={pageNumber}
                         setPageNumber={setPageNumber}
+                        pageNeighbors={pageNeighbors}
                      />
                   </div>
                </div>

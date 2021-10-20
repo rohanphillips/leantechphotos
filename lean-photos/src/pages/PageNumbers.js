@@ -9,7 +9,6 @@ const neighborPlaces = (pageNeighbors) => {
 
 const constructNeighbors = (pages, pageNeighbors) => {
    let places = [];
-   console.log("constructNeighbors")
    if(pages > 2){
       const neighbors = neighborPlaces(pageNeighbors) - 1;
       const center = Math.ceil(pages / 2);
@@ -26,19 +25,19 @@ const constructNeighbors = (pages, pageNeighbors) => {
    return places;
 }
 
-const constructPlaces = (pageNeighors, neighbors, pages) => {
+const constructPlaces = (pageNeighbors, neighbors, pages) => {
    let places = [];
    const endPlaceholders = 2;
    if(neighbors){
       places.push(1);
       const leftNeighbor = neighbors[0];
       const rightNeighbor = neighbors[neighbors.length - 1];
-      if(pages > neighborPlaces(pageNeighors) + endPlaceholders){
+      if(pages > neighborPlaces(pageNeighbors) + endPlaceholders){
       leftNeighbor > 3 && places.push("<<");
       leftNeighbor > 2 && places.push("<");
       }
       if(neighbors.length > 0) places = places.concat(neighbors);
-      if(pages > neighborPlaces(pageNeighors) + endPlaceholders){
+      if(pages > neighborPlaces(pageNeighbors) + endPlaceholders){
       rightNeighbor < pages - 1 && places.push(">");
       rightNeighbor < pages - 2 && places.push(">>");
       }
@@ -47,18 +46,18 @@ const constructPlaces = (pageNeighors, neighbors, pages) => {
    return places;
 }
 
-console.log("PageNumbers");
+
 const PageNumbers = (props) => {
-   const { pageNumber, pages, setPageNumber } = props;
-   const [pageNeighbors, setPageNeighbors] = useState(1);
+   const { pageNumber, pages, setPageNumber, pageNeighbors } = props;   
    const [neighbors, setNeighbors] = useState(null);
    const [lastPageCount, setLastPageCount] = useState(null)
 
-   if(neighbors === null || lastPageCount !== pages){
+   if(neighbors === null || lastPageCount !== pages || constructNeighbors(pages, pageNeighbors).length !== neighbors.length){
       setNeighbors(constructNeighbors(pages, pageNeighbors));
       pages !== lastPageCount && setLastPageCount(pages);
    };
    const places = constructPlaces(pageNeighbors, neighbors, pages);
+   
    return (
       <div>
          {

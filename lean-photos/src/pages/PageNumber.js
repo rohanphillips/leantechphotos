@@ -35,7 +35,7 @@ const PageNumber = (props) => {
          return styles.notselected;
       }
    }
-
+   
    return (
       <div>
          <p className={getStyle(place, pageNumber)} onClick={onPlaceClick}>{place}</p>
