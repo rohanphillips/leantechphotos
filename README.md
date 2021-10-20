@@ -63,6 +63,15 @@ The photo dashboard in a simple console that provides the following functionalit
 
 All photo's were provided with a thumbnail URL and a regular URL.  To demonstrate the ability of being able to use data sent to the `Photo` component, a photo can be clicked on and it will toggle between the two URL's provided
 
+## Pagination Component
+Included in the project is a `Pagination` element that I designed from scratch.  At its core, the pagination comprises of a placeholder on each end that represents the first and last pages.
+
+Functionality was then added to handle what happens in between.  The center item, which will start off as the center of the pages recordset has the option to include `neighbor` placeholders.  This gives the user more flexibility to find pages.  Navigation buttons exist and change behavior depending on the status of the `center and neighbors` element.
+
+The current page selected will be highlighted when it is visible in the `center/neighbors` area.
+
+Further functionality will be added to this in the future.
+
 ## React Hooks
 `useState` and `useEffect` were both used in this project to help with management of state inside multiple components
 
