@@ -1,8 +1,9 @@
-import { React, useState, Fragment } from 'react';
+import { React, useState, useEffect, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select'
 import NumericInput from 'react-numeric-input';
 import Photo from '../photodisplay/Photo'
+import Pagination from '../pages/Pagination'
 import styles from '../photodisplay/PhotoDisplay.module.css'
 
 const colOptions = (num) =>{
@@ -30,12 +31,7 @@ const inColumns = (records, settings) => {
    const formatted = [];
    let row = [];
    let counter = 1;
-   records.filter(e => {
-         let albumOk = false;
-         settings.albumNumber === -1 ? albumOk = true : albumOk = e.albumId === settings.albumNumber;
-         return albumOk && searchOk(e, settings.searchString);
-      })
-         .slice(0, settings.imgLimit).forEach(r => {
+   records.forEach(r => {
             row.push(r);
             counter ++;
             if(counter > settings.cols){
@@ -48,9 +44,16 @@ const inColumns = (records, settings) => {
    return formatted;
 }
 
+const filteredRecords = (records, settings) => {
+   return records.filter(e => {
+            let albumOk = false;
+            settings.albumNumber === -1 ? albumOk = true : albumOk = e.albumId === settings.albumNumber;
+            return albumOk && searchOk(e, settings.searchString);
+         }).slice(0, settings.imgLimit);
+}
+
 const displayCount = (records) => {
    let count = 0;
-   console.log(records);
    records.map(r => {
       count += r.length;
       return r;
@@ -64,13 +67,17 @@ const PhotoDisplay = (props) => {
    const [imageLimit, setImageLimit] = useState(5);
    const [albumSelect, setAlbumSelect] = useState({value: -1});
    const [searchString, setSearchString] = useState("");
+   const [usePagination, setUsePagination] = useState(true);
+   const [imagesPerPage, setImagesPerPage] = useState(10);
 
    const cols = columns.value;
    const imgLimit = imageLimit;
    const albumCount = Object.keys(albums).length;
    const albumNumber = albumSelect.value;
+   const workingRecordset = filteredRecords(records, {albumNumber: albumNumber, imgLimit: imgLimit, searchString: searchString});
+   const [displayRecords, setDisplayRecords] = useState([]);
    
-   const formattedRecords = inColumns(records, {albumNumber: albumNumber, imgLimit: imgLimit, cols: cols, searchString: searchString});
+   const formattedRecords = inColumns(displayRecords, {cols: cols});
 
    const onSearchChange = (e) => {
       e.preventDefault();
@@ -80,8 +87,8 @@ const PhotoDisplay = (props) => {
    const onClear = (e) => {
       e.preventDefault();
       setSearchString("");
-   }
-   console.log("albums:", albums)
+   } 
+
    return(
       <div>  
          <div className={styles.Controls}>       
@@ -129,9 +136,20 @@ const PhotoDisplay = (props) => {
                </div>
             </div>
          </div>
-         {formattedRecords.length > 0 &&
+         {
             <div>
-               <div className={styles.centerBlock}>Photo Display - Click to any image to Enlarge</div>
+               <div className={styles.centerBlock}>Photo Display - Click to any image to Enlarge</div>               
+               <div className={styles.centerBlock}>
+                  <Pagination 
+                     usePagination={usePagination}
+                     setUsePagination={setUsePagination}
+                     imagesPerPage={imagesPerPage}
+                     setImagesPerPage={setImagesPerPage}
+                     records={workingRecordset}
+                     displayRecords={displayRecords}
+                     setDisplayRecords={setDisplayRecords}
+                  />
+               </div>
                <div className={styles.centerBlock}>
                   Currently showing {displayCount(formattedRecords)} photos
                </div>

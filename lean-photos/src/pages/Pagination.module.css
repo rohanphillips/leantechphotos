@@ -1,0 +1,15 @@
+.block{
+   display: inline-block;
+   align-items: center;
+   justify-content: center;
+   padding: 5px;
+}
+
+.selected{
+   color: hsl(0, 63%, 36%);
+   background: rgb(0, 0, 0);
+}
+
+.notselected{
+   color: rgb(0, 0, 0)
+}
