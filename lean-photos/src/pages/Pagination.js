@@ -7,11 +7,10 @@ const Pagination = (props) => {
    const { imagesPerPage, setImagesPerPage, usePagination, setUsePagination, records, displayRecords, setDisplayRecords } = props;
    const [pageNumber, setPageNumber] = useState(1);
    const [lastPageNumber, setLastPageNumber] = useState(1);
-   const [lastRecordCount, SetLastRecordCount] = useState(null);
+   const [lastRecordCount, setLastRecordCount] = useState(null);
    const [newChanges, setNewChanges] = useState(false);
-   const pages = Math.ceil(records.length / imagesPerPage);
+   let pages = Math.ceil(records.length / imagesPerPage);
    const startPointer = ((pageNumber - 1) * imagesPerPage);
-   
    const onChange = (e) => {
       setUsePagination(e.target.checked);
       setNewChanges(true);
@@ -24,18 +23,21 @@ const Pagination = (props) => {
 
    useEffect(() => {
       if(displayRecords.length === 0 || lastRecordCount !== records.length || pageNumber !== lastPageNumber || newChanges){
+         console.log("displayRecords.length:", displayRecords.length, "lastRecordCount:", lastRecordCount, "pageNumber:", pageNumber, "lastPageNumber:", lastPageNumber);
          let recordset;
          if(usePagination){
-            recordset = records.slice(startPointer, imagesPerPage);
+            recordset = records.slice(startPointer, startPointer + imagesPerPage);
          } else {
             recordset = records;
          }
+         console.log("recordset:", recordset, startPointer, usePagination, imagesPerPage)
          setDisplayRecords(recordset);
-         SetLastRecordCount(records.length);
+         setLastRecordCount(records.length);
          setNewChanges(false);
+         setLastPageNumber(pageNumber);
       }
    })
-
+   console.log("Pagination");
    return (
       <div>
         <div className={styles.block}>
@@ -62,6 +64,7 @@ const Pagination = (props) => {
                      <PageNumbers 
                         pages={pages}
                         pageNumber={pageNumber}
+                        setPageNumber={setPageNumber}
                      />
                   </div>
                </div>
