@@ -28,7 +28,6 @@ const Pagination = (props) => {
 
    useEffect(() => {
       if(displayRecords.length === 0 || lastRecordCount !== records.length || pageNumber !== lastPageNumber || newChanges){
-         console.log("displayRecords.length:", displayRecords.length, "lastRecordCount:", lastRecordCount, "pageNumber:", pageNumber, "lastPageNumber:", lastPageNumber);
          let recordset;
          if(usePagination){
             recordset = records.slice(startPointer, startPointer + imagesPerPage);
