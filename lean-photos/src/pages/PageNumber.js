@@ -9,7 +9,6 @@ const PageNumber = (props) => {
    }
 
    const updatePagination = (v) => {
-      let result;
       switch(v){
          case ">>":
             setNeighbors([...Array(pageNeighbors).keys()].map(e => e + pages - neighbors.length));

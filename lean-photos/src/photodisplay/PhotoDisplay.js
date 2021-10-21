@@ -1,4 +1,4 @@
-import { React, useState, useEffect, Fragment } from 'react';
+import { React, useState, Fragment } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select'
 import NumericInput from 'react-numeric-input';

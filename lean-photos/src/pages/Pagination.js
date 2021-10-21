@@ -34,13 +34,12 @@ const Pagination = (props) => {
          } else {
             recordset = records;
          }
-         console.log("recordset:", recordset, startPointer, usePagination, imagesPerPage)
          setDisplayRecords(recordset);
          setLastRecordCount(records.length);
          setNewChanges(false);
          setLastPageNumber(pageNumber);
       }
-   })
+   }, [displayRecords.length, imagesPerPage, lastPageNumber, lastRecordCount, newChanges, pageNumber, records, setDisplayRecords, startPointer, usePagination])
 
    return (
       <div>
